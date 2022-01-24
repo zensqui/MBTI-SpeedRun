@@ -1,14 +1,23 @@
+const fs = require("fs")
 const { REST } = require("@discordjs/rest")
 const { Routes } = require("discord-api-types/v9")
-const { token } = require("./config.json")
-const fs = require("fs")
+const { SlashCommandBuilder } = require("@discordjs/builders")
 
-const keys = require("./../../auth/keys.json")
+const Mongoose = require("mongoose")
+const Score = require("./schemas/Score")
+const DB = Mongoose.connect(keys.mongoServer, {
+	useNewUrlParser: true,
+	useUnifiedTopology: true,
+})
+var connection = Mongoose.connection
 
 
-const clientID = keys.clientID
 
-const rest = new REST({ version: "9" }).setToken(keys.token)
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] })
 
+client.once("ready", () => {
+	console.log("Ready!")
+})
 
-
+// Login to Discord with your client's token
+client.login(keys.token)
