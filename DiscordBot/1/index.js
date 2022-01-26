@@ -1,5 +1,6 @@
 const fs = require("fs")
 const keys = require("./../../auth/keys.json")
+const MBTI = require("./../data/MBTI.json")
 const { REST } = require("@discordjs/rest")
 const { Routes } = require("discord-api-types/v9")
 const { SlashCommandBuilder } = require("@discordjs/builders")
@@ -43,9 +44,15 @@ client.on("interactionCreate", async (interaction) => {
 			break
 		case "top":
 			var mongoSearch = {}
-			var category = interaction.options.getString("category", false)
+            var category = interaction.options.getString("category", false)
+            
 			var user = interaction.options.getUser("user", false)
-			if (category) mongoSearch.category = category
+            if (category) {
+                var toggle = false
+                MBTI["all-types"].forEach((type) => { if (type.code == category) toggle = true; if(type.name == category) toggle = true })
+                if(!toggle) return interaction.reply("Invalid category")
+                mongoSearch.category = category
+            }
 			if (user) mongoSearch.userID = user.id
 			console.log(mongoSearch)
 			var scores = await Score.find(mongoSearch).sort({ time: -1 }).limit(10)
