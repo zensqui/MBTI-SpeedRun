@@ -1,0 +1,84 @@
+{
+	"all-types": [
+		{
+			"name": "architect",
+			"code": "intj",
+			"designation": "analyst"
+		},
+		{
+			"name": "logician",
+			"code": "intp",
+			"designation": "analyst"
+		},
+		{
+			"name": "commander",
+			"code": "entj",
+			"designation": "analyst"
+		},
+		{
+			"name": "debater",
+			"code": "entp",
+			"designation": "analyst"
+		},
+		{
+			"name": "advocate",
+			"code": "infj",
+			"designation": "diplomat"
+		},
+		{
+			"name": "mediator",
+			"code": "infp",
+			"designation": "diplomat"
+		},
+		{
+			"name": "protagonist",
+			"code": "enfj",
+			"designation": "diplomat"
+		},
+		{
+			"name": "campaigner",
+			"code": "enfp",
+			"designation": "diplomat"
+		},
+		{
+			"name": "logistician",
+			"code": "istj",
+			"designation": "sentinel"
+		},
+		{
+			"name": "defender",
+			"code": "isfj",
+			"designation": "sentinel"
+		},
+		{
+			"name": "executive",
+			"code": "estj",
+			"designation": "sentinel"
+		},
+		{
+			"name": "consul",
+			"code": "esfj",
+			"designation": "sentinel"
+		},
+		{
+			"name": "virtuoso",
+			"code": "istp",
+			"designation": "explorer"
+		},
+		{
+			"name": "adventurer",
+			"code": "isfp",
+			"designation": "explorer"
+		},
+		{
+			"name": "entrepreneur",
+			"code": "estp",
+			"designation": "explorer"
+		},
+		{
+			"name": "entertainer",
+			"code": "esfp",
+			"designation": "explorer"
+		}
+	]
+}

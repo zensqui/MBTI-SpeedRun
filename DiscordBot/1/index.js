@@ -28,26 +28,28 @@ client.on("interactionCreate", async (interaction) => {
 		case "submit":
 			console.log(interaction.options.data)
 			console.log(interaction.options.getNumber("time", true))
-
-			var dummy = new Score({
+			var temp = {
 				time: interaction.options.getNumber("time", true),
 				category: interaction.options.getString("category", true),
 				personality: interaction.options.getString("personality", true),
-				user: interaction.user.id,
-			})
+				user: interaction.user.username,
+				userID: interaction.user.id,
+			}
+			var dummy = new Score(temp)
 			await dummy.save()
 
-			//interaction.reply(scores.toString())
+            interaction.reply(temp)
+            
 			break
-        case "top":
-            var mongoSearch = {}
-            var category = interaction.options.getString("category", false)
-            var user = interaction.options.getUser("user", false)
-            if (category) mongoSearch.category = category
-            if (user) mongoSearch.userID = user.id
-            console.log(mongoSearch)
-            var scores = await Score.find(mongoSearch).sort({ time: -1 }).limit(10)
+		case "top":
+			var mongoSearch = {}
+			var category = interaction.options.getString("category", false)
+			var user = interaction.options.getUser("user", false)
+			if (category) mongoSearch.category = category
+			if (user) mongoSearch.userID = user.id
+			console.log(mongoSearch)
+			var scores = await Score.find(mongoSearch).sort({ time: -1 }).limit(10)
 
-            interaction.reply(scores[0].toString())
+			interaction.reply(scores[0].toString())
 	}
 })
