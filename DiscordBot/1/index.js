@@ -31,32 +31,47 @@ client.on("interactionCreate", async (interaction) => {
 			console.log(interaction.options.getNumber("time", true))
 			var temp = {
 				time: interaction.options.getNumber("time", true),
-				category: interaction.options.getString("category", true),
+				//category: interaction.options.getString("category", true),
 				personality: interaction.options.getString("personality", true),
-				user: interaction.user.username,
 				userID: interaction.user.id,
 			}
+			var personality = interaction.options.getString("personality", true)
+			if (personality) {
+				var toggle = false
+				MBTI["all-types"].forEach((type) => {
+					if (type.code == personality) toggle = true
+					if (type.name == personality) toggle = true
+				})
+				if (!toggle) return interaction.reply("Invalid category")
+			}
+
 			var dummy = new Score(temp)
 			await dummy.save()
 
-            interaction.reply(temp)
-            
+			interaction.reply(temp)
+
 			break
 		case "top":
 			var mongoSearch = {}
-            var category = interaction.options.getString("category", false)
-            
+			var personality = interaction.options.getString("personality", false)
+
 			var user = interaction.options.getUser("user", false)
-            if (category) {
-                var toggle = false
-                MBTI["all-types"].forEach((type) => { if (type.code == category) toggle = true; if(type.name == category) toggle = true })
-                if(!toggle) return interaction.reply("Invalid category")
-                mongoSearch.category = category
-            }
+			if (personality) {
+				var toggle = false
+				MBTI["all-types"].forEach((type) => {
+					if (type.code == personality) toggle = true
+					if (type.name == personality) toggle = true
+				})
+				if (!toggle) return interaction.reply("Invalid category")
+				mongoSearch.personality = personality
+			}
 			if (user) mongoSearch.userID = user.id
 			console.log(mongoSearch)
 			var scores = await Score.find(mongoSearch).sort({ time: -1 }).limit(10)
-
-			interaction.reply(scores[0].toString())
+			var output = ""
+			scores.forEach((score) => {
+				output += `${score.user} - ${score.time} - ${score.personality}\n`
+			})
+			interaction.reply()
 	}
 })
