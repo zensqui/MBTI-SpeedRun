@@ -39,9 +39,15 @@ client.on("interactionCreate", async (interaction) => {
 
 			//interaction.reply(scores.toString())
 			break
-		case "top":
-			console.log(
-				await Score.find({ user: interaction.user.id}).sort({ time: -1 }).limit(5)
-			)
+        case "top":
+            var mongoSearch = {}
+            var category = interaction.options.getString("category", false)
+            var user = interaction.options.getUser("user", false)
+            if (category) mongoSearch.category = category
+            if (user) mongoSearch.userID = user.id
+            console.log(mongoSearch)
+            var scores = await Score.find(mongoSearch).sort({ time: -1 }).limit(10)
+
+            interaction.reply(scores[0].toString())
 	}
 })

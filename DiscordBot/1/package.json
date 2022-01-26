@@ -14,7 +14,7 @@
     "mongoose": "^6.1.7"
   },
   "scripts": {
-      "start": "node index.js",
-      "reload": "node reload.js"
+    "start": "node index.js",
+    "reload": "node reload.js"
   }
 }
