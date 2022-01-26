@@ -13,7 +13,10 @@ var ScoreSchema = mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	user: {
+		type: String,
+		required: true,
+	},
 })
-//AI assistant ftw lmfao
-var Score = mongoose.model("Score", ScoreSchema)
-module.exports = Score
+
+module.exports = mongoose.model("Score", ScoreSchema)
